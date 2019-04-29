@@ -70,6 +70,7 @@ extension ClientManager {
                 // 完整数据 转发给客户端
                 let totalData = headData + typeData + data
                 
+                print("类型为：\(type)")
                 // 进入会话
                 if type == 0 {
                     // 数据转成聊天数据
