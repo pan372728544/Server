@@ -104,6 +104,7 @@ extension ClientManager {
                     let chatMsg = try! TextMessage.parseFrom(data: data)
                     // 是否包含这个聊天Id
                     let chatType = chatMsg.chatType
+                    print("\(chatMsg.text)")
                     // 单聊
                     if chatType == "1" {
                         
