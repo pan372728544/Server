@@ -1,20 +1,30 @@
 PODS:
   - ProtocolBuffers-Swift (4.0.6)
+  - Realm (3.14.2):
+    - Realm/Headers (= 3.14.2)
+  - Realm/Headers (3.14.2)
+  - RealmSwift (3.14.2):
+    - Realm (= 3.14.2)
   - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
   - ProtocolBuffers-Swift (~> 4.0.6)
+  - RealmSwift (~> 3.14.1)
   - SwiftSocket (~> 2.0.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - ProtocolBuffers-Swift
+    - Realm
+    - RealmSwift
     - SwiftSocket
 
 SPEC CHECKSUMS:
   ProtocolBuffers-Swift: 09b5cfcc641ab512d6aaa1d2cc3879a40432052c
+  Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
+  RealmSwift: 1797f272fb51c555b764fada32e82159a2c65247
   SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
-PODFILE CHECKSUM: 3dbea3ffe8d8aadc8f6b88849b98f6fbd01dfa79
+PODFILE CHECKSUM: b526a6e3113f63ce15b52e23c32f9e5e0a1cdce8
 
 COCOAPODS: 1.5.3

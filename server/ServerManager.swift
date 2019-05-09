@@ -34,6 +34,8 @@ extension ServerManager {
         let res : Result = serverSocket.listen()
         isServerRunning = true
         
+        // 配置数据库
+        RealmTool.configRealm()
         if res.isSuccess {
             print("服务器已经开始监听")
         } else {
@@ -92,8 +94,16 @@ extension ServerManager : ClientManagerDelegate {
     func sendMsgToClientHandleSingleChat(_ data : Data,fromeId : String,toId : String, chatId : String) {
         
         DispatchQueue.main.async {
+            
+            var receiveOnline = false
+            
             // 遍历所有字典
             for (key,_) in self.clientSingleDic {
+                
+                // 判断接收方是否在线
+                if key == toId {
+                    receiveOnline = true
+                }
                 
                 if (key == fromeId || key == toId) && (chatId == "\(fromeId)_\(toId)" || chatId == "\(toId)_\(fromeId)") {
                     
@@ -102,6 +112,62 @@ extension ServerManager : ClientManagerDelegate {
                     _ = client.send(data: data)
                 }
             }
+            
+            // 不在线写入数据库
+            if !receiveOnline{
+                // 将数据写入数据库
+                self.insertToRealm(data: data,key: toId)
+            }
+
+            
         }
     }
+    
+    
+
+
+    
+    // 代理方法
+    func sendOfflineMsg(data: Data, toId: String) {
+        handleOffMessage(data: data, key: toId)
+    }
+    
+    
+    //
+    func handleOffMessage(data: Data,key : String)  {
+        
+        DispatchQueue.main.async {
+            // 查询离线数据
+            let offlineMsgs = RealmTool.getMessageByPredicate("key = \'\(key)\'")
+            
+            if offlineMsgs.count > 0 {
+                
+                let client : TCPClient = self.clientSingleDic[key] as! TCPClient
+                
+                for itme in offlineMsgs {
+                    
+                    let data = itme.chatData
+                    
+                    _ = client.send(data: data!)
+                }
+                
+                RealmTool.deleteMessages(messages: offlineMsgs)
+            }
+            
+        }
+        
+     
+    }
+    
+    func insertToRealm(data: Data,key : String)  {
+        
+        let chatMsg = ChatMessage()
+        chatMsg.key = key
+        chatMsg.chatData = data
+        
+        RealmTool.insertMessage(by: chatMsg)
+    }
+    
+    
+    
 }

@@ -19,7 +19,8 @@ protocol ClientManagerDelegate : class {
     func sendMsgToClientHandleSingleChat(_ data : Data,fromeId : String,toId : String, chatId : String)
     
     
-   
+   // 处理离线消息
+    func sendOfflineMsg(data: Data,toId : String)
 }
 
 
@@ -78,6 +79,9 @@ extension ClientManager {
                     // 更新字典数据
                     dicClient.updateValue(tcpClient, forKey: chatMsg.userId)
                     print("\(String(describing: chatMsg.name)) 进入回话页面")
+                    
+                    // 进入会话查看是否有离线消息
+                    delegate?.sendOfflineMsg(data: data, toId: chatMsg.userId)
                 }
                 else if type == 1 {
                     // 离开回话
@@ -107,6 +111,9 @@ extension ClientManager {
                     print("\(chatMsg.text)")
                     // 单聊
                     if chatType == "1" {
+                        
+                        
+                        
                         
                         delegate?.sendMsgToClientHandleSingleChat(totalData, fromeId: chatMsg.user.userId, toId: chatMsg.toUserId,chatId: chatMsg.chatId)
                         continue

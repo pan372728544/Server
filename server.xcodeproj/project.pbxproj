@@ -16,6 +16,8 @@
 		3880639E226D647D00A4BEAC /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3880639C226D647D00A4BEAC /* ServerManager.swift */; };
 		38C300BE22705154007A537F /* Immessage.proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C300BC22705154007A537F /* Immessage.proto.swift */; };
 		38C300BF22705154007A537F /* IMMessage.proto in Sources */ = {isa = PBXBuildFile; fileRef = 38C300BD22705154007A537F /* IMMessage.proto */; };
+		38FAF09E2283B23300BCE225 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF09C2283B23300BCE225 /* ChatMessage.swift */; };
+		38FAF09F2283B23300BCE225 /* RealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FAF09D2283B23300BCE225 /* RealmTool.swift */; };
 		B8C45D95F81E96D52C27BFA7 /* Pods_server.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09D2AE5B17C16D1B1079E497 /* Pods_server.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		3880639C226D647D00A4BEAC /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		38C300BC22705154007A537F /* Immessage.proto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Immessage.proto.swift; path = ../../Cupid/Cupid/Socket/Client/Immessage.proto.swift; sourceTree = "<group>"; };
 		38C300BD22705154007A537F /* IMMessage.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.protobuf; name = IMMessage.proto; path = ../../Cupid/Cupid/Socket/Client/IMMessage.proto; sourceTree = "<group>"; };
+		38FAF09C2283B23300BCE225 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		38FAF09D2283B23300BCE225 /* RealmTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmTool.swift; sourceTree = "<group>"; };
 		F1A4EE434EA8274164E644D0 /* Pods-server.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-server.debug.xcconfig"; path = "Pods/Target Support Files/Pods-server/Pods-server.debug.xcconfig"; sourceTree = "<group>"; };
 		FD0EFE8F596A5FFB014877AA /* Pods-server.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-server.release.xcconfig"; path = "Pods/Target Support Files/Pods-server/Pods-server.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +63,7 @@
 		3880637D226D54B000A4BEAC = {
 			isa = PBXGroup;
 			children = (
+				38FAF09B2283B23300BCE225 /* RealmSwift */,
 				38806388226D54B100A4BEAC /* server */,
 				38806387226D54B100A4BEAC /* Products */,
 				9FB2AE0565B76563D4C0E879 /* Pods */,
@@ -89,6 +94,15 @@
 				38806395226D54B400A4BEAC /* Info.plist */,
 			);
 			path = server;
+			sourceTree = "<group>";
+		};
+		38FAF09B2283B23300BCE225 /* RealmSwift */ = {
+			isa = PBXGroup;
+			children = (
+				38FAF09C2283B23300BCE225 /* ChatMessage.swift */,
+				38FAF09D2283B23300BCE225 /* RealmTool.swift */,
+			);
+			path = RealmSwift;
 			sourceTree = "<group>";
 		};
 		9FB2AE0565B76563D4C0E879 /* Pods */ = {
@@ -179,6 +193,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-server/Pods-server-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ProtocolBuffers-Swift/ProtocolBuffers.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -186,6 +202,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtocolBuffers.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +240,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FAF09E2283B23300BCE225 /* ChatMessage.swift in Sources */,
+				38FAF09F2283B23300BCE225 /* RealmTool.swift in Sources */,
 				3880639E226D647D00A4BEAC /* ServerManager.swift in Sources */,
 				3880638C226D54B100A4BEAC /* ViewController.swift in Sources */,
 				38C300BF22705154007A537F /* IMMessage.proto in Sources */,
@@ -375,12 +395,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QH6865CZKU;
 				INFOPLIST_FILE = server/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.server;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pz.666;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,12 +415,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QH6865CZKU;
 				INFOPLIST_FILE = server/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.server;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pz.666;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
